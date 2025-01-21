@@ -91,7 +91,7 @@ export async function GET(req: Request) {
     }
 
     // Fetch cases where patientId matches userId
-    const cases = await Case.find({ patientId: userId })
+    const cases = await Case.find({ assignedDoctor: userId })
       .populate("assignedDoctor", "name") // Populate assignedDoctor field
       .lean();
 

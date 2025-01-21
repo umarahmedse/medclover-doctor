@@ -44,8 +44,8 @@ const data = {
           url: "/cases-list",
         },
         {
-          title: "View Doctors",
-          url: "/view-doctors",
+          title: "Update Profile",
+          url: "/update-profile",
         },
       ],
     },
