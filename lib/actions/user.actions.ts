@@ -1,12 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable */
 "use server";
 import dbConnection from "../mongodb";
-import {User} from "@/models";
+import {Doctor} from "@/models";
 
 export async function createUser(user: any) {
   try {
     await dbConnection();
-    return await User.create(user);
+    return await Doctor.create(user);
   } catch (error) {
     throw new Error(error instanceof Error ? error.message : String(error));
   }
