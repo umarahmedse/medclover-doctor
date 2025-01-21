@@ -77,8 +77,17 @@ const DoctorProfileUpdateForm = () => {
   };
 
   return (
-    <div>
+    <div className="p-4">
+      <h1>Update Doctor Profile</h1>
       <form onSubmit={handleSubmit}>
+      <Label htmlFor="id">ID</Label>
+        <Input
+          id="id"
+          name="id"
+          type="text"
+          value={userId || "" as any}
+          disabled={true}
+        />
         <Label htmlFor="email">Email</Label>
         <Input
           id="email"

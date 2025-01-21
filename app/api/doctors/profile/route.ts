@@ -1,8 +1,7 @@
 /* eslint-disable */
-
 import { NextResponse } from "next/server";
 import connectToDatabase from "@/lib/mongodb";
-import { Doctor } from "@/models"; // Make sure your Doctor model is correctly imported
+import { Doctor } from "@/models"; // Ensure your Doctor model is correctly imported
 
 export async function GET(req: Request) {
   try {
@@ -17,8 +16,8 @@ export async function GET(req: Request) {
     // Connect to the database
     await connectToDatabase();
 
-    // Find the doctor by user_id (Clerk's user_id stored in MongoDB)
-    const doctor = await Doctor.findById({ id });
+    // Find the doctor by the `id` field (Clerk's user_id stored in MongoDB)
+    const doctor = await Doctor.findOne({ id }); // Query by `id`, not `_id`
 
     if (!doctor) {
       return NextResponse.json({ error: "Doctor not found" }, { status: 404 });
