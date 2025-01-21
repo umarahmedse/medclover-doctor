@@ -16,12 +16,12 @@ const DoctorProfileUpdateForm = () => {
   const userId = session?.user.publicMetadata.user_id;
   const { toast } = useToast();  // Get the toast function from the hook
   const [formData, setFormData] = useState<any>({
-    id: "",
+    id: "",  // Make sure id has a default value of an empty string
     email: "",
     name: "",
     phone: "",
     specialization: "",
-    experienceYears: 0,
+    experienceYears: 0,  // Default number is 0
   });
 
   const [loading, setLoading] = useState(false);
@@ -32,8 +32,24 @@ const DoctorProfileUpdateForm = () => {
 
     const fetchDoctorData = async () => {
       try {
+        // Ensure userId is available and valid
+        if (!userId) {
+          console.error("User ID is missing.");
+          return;
+        }
+    
+        // Make the GET request with the userId query parameter
         const response = await axios.get(`/api/doctors/profile?id=${userId}`);
-        setFormData(response.data);
+        
+        // Assuming the response data contains the doctor profile
+        setFormData({
+          id: response.data.id || "",
+          email: response.data.email || "",
+          name: response.data.name || "",
+          phone: response.data.phone || "",
+          specialization: response.data.specialization || "",
+          experienceYears: response.data.experienceYears || 0, // Default to 0 if missing
+        });
       } catch (error) {
         console.error("Failed to fetch doctor profile data:", error);
       }
@@ -77,74 +93,86 @@ const DoctorProfileUpdateForm = () => {
   };
 
   return (
-    <div className="p-4">
-      <h1>Update Doctor Profile</h1>
-      <form onSubmit={handleSubmit}>
-      <Label htmlFor="id">ID</Label>
-        <Input
-          id="id"
-          name="id"
-          type="text"
-          value={userId || "" as any}
-          disabled={true}
-        />
-        <Label htmlFor="email">Email</Label>
-        <Input
-          id="email"
-          name="email"
-          type="email"
-          value={formData.email || ""}
-          onChange={handleChange}
-          disabled={loading}
-          required
-        />
+    <div className="p-4 w-full">
+      <h1 className="text-3xl !mx-auto font-semibold w-fit">Update Doctor Profile</h1>
+      <form onSubmit={handleSubmit} className="p-4 flex flex-col gap-3 items-center">
+        <div className="flex flex-col gap-1 md:w-[50%]">
+          <Label htmlFor="id">ID</Label>
+          <Input
+            id="id"
+            name="id"
+            type="text"
+            value={userId || "" as any}  // Ensure userId has a value
+            disabled={true}
+          />
+        </div>
 
-        <Label htmlFor="name">Name</Label>
-        <Input
-          id="name"
-          name="name"
-          type="text"
-          value={formData.name}
-          onChange={handleChange}
-          disabled={loading}
-          required
-        />
+        <div className="flex flex-col gap-1 md:w-[50%]">
+          <Label htmlFor="email">Email</Label>
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            value={formData.email || ""}  // Ensure empty string if undefined
+            disabled={true}
+            required
+          />
+        </div>
 
-        <Label htmlFor="phone">Phone</Label>
-        <Input
-          id="phone"
-          name="phone"
-          type="tel"
-          value={formData.phone}
-          onChange={handleChange}
-          disabled={loading}
-          required
-        />
+        <div className="flex flex-col gap-1 md:w-[50%]">
+          <Label htmlFor="name">Name</Label>
+          <Input
+            id="name"
+            name="name"
+            type="text"
+            value={formData.name || ""}  // Default to empty string if undefined
+            onChange={handleChange}
+            disabled={loading}
+            required
+          />
+        </div>
 
-        <Label htmlFor="specialization">Specialization</Label>
-        <Input
-          id="specialization"
-          name="specialization"
-          type="text"
-          value={formData.specialization}
-          onChange={handleChange}
-          disabled={loading}
-          required
-        />
+        <div className="flex flex-col gap-1 md:w-[50%]">
+          <Label htmlFor="phone">Phone</Label>
+          <Input
+            id="phone"
+            name="phone"
+            type="tel"
+            value={formData.phone || ""}  // Default to empty string if undefined
+            onChange={handleChange}
+            disabled={loading}
+            required
+          />
+        </div>
 
-        <Label htmlFor="experienceYears">Experience (Years)</Label>
-        <Input
-          id="experienceYears"
-          name="experienceYears"
-          type="number"
-          value={formData.experienceYears}
-          onChange={handleChange}
-          disabled={loading}
-          min="0"
-          required
-        />
+        <div className="flex flex-col gap-1 md:w-[50%]">
+          <Label htmlFor="specialization">Specialization</Label>
+          <Input
+            id="specialization"
+            name="specialization"
+            type="text"
+            value={formData.specialization || ""}  // Default to empty string if undefined
+            onChange={handleChange}
+            disabled={loading}
+            required
+          />
+        </div>
 
-        <Button type="submit" disabled={loading}>
+        <div className="flex flex-col gap-1 md:w-[50%]">
+          <Label htmlFor="experienceYears">Experience (Years)</Label>
+          <Input
+            id="experienceYears"
+            name="experienceYears"
+            type="number"
+            value={formData.experienceYears || 0}  // Default to 0 if undefined
+            onChange={handleChange}
+            disabled={loading}
+            min="0"
+            required
+          />
+        </div>
+
+        <Button type="submit" disabled={loading} className="md:w-[200px] w-full">
           {loading ? (
             <>
               <Spinner className="mr-2" /> Updating...
