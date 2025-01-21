@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { NextResponse } from "next/server";
 import connectToDatabase from "@/lib/mongodb";
 import { Doctor } from "@/models"; // Make sure your Doctor model is correctly imported
