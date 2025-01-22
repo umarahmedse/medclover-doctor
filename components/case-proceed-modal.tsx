@@ -35,6 +35,7 @@ export function CaseProceedModal({ isOpen, onClose, caseData }: CaseProceedModal
 
     try {
       await axios.put(`/api/cases/${caseData._id}`, {
+        id: caseData._id,
         diagnosis,
         prescription,
         doctorRemarks,

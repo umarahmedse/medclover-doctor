@@ -52,18 +52,17 @@ interface ICase {
 }
 
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
-  const { id } = params;  // Extracting the id directly from params
-
+export async function PUT(request: NextRequest) {
   try {
     await connectToDB();
+
+    // Get the id from the request body
+    const body = await request.json();
+    const { id, diagnosis, prescription, doctorRemarks } = body;
 
     if (!id) {
       return NextResponse.json({ message: "Case ID is required" }, { status: 400 });
     }
-
-    const body = await request.json();
-    const { diagnosis, prescription, doctorRemarks, isClosed } = body;
 
     // Perform the update and ensure it returns a single object, not an array
     const updatedCase = await Case.findByIdAndUpdate(
