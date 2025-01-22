@@ -58,7 +58,7 @@ export async function PUT(request: NextRequest) {
 
     // Get the id from the request body
     const body = await request.json();
-    const { id, diagnosis, prescription, doctorRemarks } = body;
+    const { id, diagnosis, perscription:prescription, doctorRemarks } = body;
 
     if (!id) {
       return NextResponse.json({ message: "Case ID is required" }, { status: 400 });
