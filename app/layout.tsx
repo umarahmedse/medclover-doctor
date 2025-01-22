@@ -26,7 +26,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "MedClover",
+  title: "MedClover - Doctor",
   description: "Connecting healthcare providers with patients.",
 };
 

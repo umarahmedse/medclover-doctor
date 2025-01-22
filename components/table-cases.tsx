@@ -90,12 +90,15 @@ export function TableCases() {
       </TableBody>
     </Table>
   ) : (
-    <div className="!w-full flex flex-col gap-2 items-center justify-center">
-      <h1>No Previous Cases 🙅‍♂️</h1>
-      <h3>Want To Add One? ➕</h3>
-      <Link href="/addcase" className="px-4 py-2 rounded-lg bg-black dark:bg-white text-white dark:text-black">
-        Add Case
-      </Link>
-    </div>
+    <div className="!w-full flex flex-col gap-2 items-center justify-center text-center">
+    <h1>
+      No Previous Cases 🙅‍♂️  
+      <br />
+      Must be nice, Doc—just kick back and relax.  
+      <br />
+      Patients? Oh, they’ll show up… eventually. Probably. Maybe. 🤷‍♂️  
+    </h1>
+  </div>
+  
   );
 }

@@ -206,7 +206,7 @@ const DoctorProfileUpdateForm = () => {
         >
           {loading ? (
             <>
-              <Spinner className="mr-2" /> Updating...
+              <Spinner size={"medium"} show={true} className="mr-2" /> Updating...
             </>
           ) : (
             "Update Profile"

@@ -43,7 +43,7 @@ export default function CaseView() {
   if (loading)
     return (
       <div className="flex items-center justify-center w-full h-full">
-        <Spinner />
+        <Spinner size={"medium"} show={true} />
       </div>
     )
 
