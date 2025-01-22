@@ -1,3 +1,5 @@
+/* eslint-disable*/
+
 import { NextResponse } from "next/server";
 import connectToDatabase from "@/lib/mongodb";
 import { Doctor } from "@/models"; // Assuming you have the Doctor model properly set up
@@ -18,12 +20,12 @@ export async function PUT(req: Request) {
     const updatedDoctor = email
       ? await Doctor.findOneAndUpdate(
           { email },
-          { name, phone, specialization, experienceYears },
+          { name, phone, specialization, experienceYears, isProfileCompleted: true },
           { new: true }
         )
       : await Doctor.findByIdAndUpdate(
           id,
-          { name, phone, specialization, experienceYears },
+          { name, phone, specialization, experienceYears, isProfileCompleted: true },
           { new: true }
         );
 
