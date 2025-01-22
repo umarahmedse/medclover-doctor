@@ -51,12 +51,9 @@ interface ICase {
   isClosed: boolean;
 }
 
-export async function PUT(
-  request: NextRequest,
-  context: { params: { id: string } }
-) {
-  // Wait for params to resolve before accessing
-  const { id } = await context.params;  // Ensure params is awaited
+
+export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+  const { id } = params;  // Extracting the id directly from params
 
   try {
     await connectToDB();
@@ -68,7 +65,7 @@ export async function PUT(
     const body = await request.json();
     const { diagnosis, prescription, doctorRemarks, isClosed } = body;
 
-    // Ensure Case.findByIdAndUpdate() returns a single object, not an array
+    // Perform the update and ensure it returns a single object, not an array
     const updatedCase = await Case.findByIdAndUpdate(
       id,
       {
@@ -78,24 +75,21 @@ export async function PUT(
         isClosed: true, // Marking as closed
       },
       { new: true, runValidators: true }
-    ).lean();
+    ).lean(); // Use lean() to get a plain object instead of a Mongoose document
 
-    // Type assertion: we expect updatedCase to be ICase or null
-    if (!updatedCase) {
+    // Ensure updatedCase is a single object, not an array
+    if (!updatedCase || Array.isArray(updatedCase)) {
       return NextResponse.json({ message: "Case not found" }, { status: 404 });
     }
-
-    // Explicitly cast updatedCase to ICase to match the type
-    const caseData: ICase = updatedCase as any;
 
     return NextResponse.json({
       message: "Case updated successfully",
       case: {
-        _id: caseData._id.toString(),
-        diagnosis: caseData.diagnosis,
-        prescription: caseData.prescription,
-        doctorRemarks: caseData.doctorRemarks,
-        isClosed: caseData.isClosed,
+        _id: updatedCase._id,
+        diagnosis: updatedCase.diagnosis,
+        prescription: updatedCase.prescription,
+        doctorRemarks: updatedCase.doctorRemarks,
+        isClosed: updatedCase.isClosed,
       },
     });
   } catch (error) {
