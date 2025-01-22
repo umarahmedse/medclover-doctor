@@ -36,11 +36,11 @@ const data = {
       isActive: true,
       items: [
         {
-          title: "Add Case",
-          url: "/addcase",
+          title: "Proceed Case",
+          url: "/select-case",
         },
         {
-          title: "Case History",
+          title: "View Cases",
           url: "/cases-list",
         },
         {

@@ -45,7 +45,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ClerkProvider>
+          <ClerkProvider signUpFallbackRedirectUrl={"/update-profile"}>
             <SignedOut>
               <RedirectToSignIn />
             </SignedOut>
