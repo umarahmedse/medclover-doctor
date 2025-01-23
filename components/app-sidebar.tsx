@@ -36,10 +36,6 @@ const data = {
       isActive: true,
       items: [
         {
-          title: "Proceed Case",
-          url: "/select-case",
-        },
-        {
           title: "View Cases",
           url: "/cases-list",
         },
