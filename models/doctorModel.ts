@@ -43,13 +43,14 @@ const DoctorSchema = new Schema(
       type: Boolean,
       default: true,
     },
-    isProfileCompleted:{
-      type:Boolean,
-      default:false
-    }
-    
-    
-
+    isProfileCompleted: {
+      type: Boolean,
+      default: false,
+    },
+    image_url: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );
