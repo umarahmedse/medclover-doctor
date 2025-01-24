@@ -59,11 +59,9 @@ export async function POST(req: Request) {
 
   if (eventType === "user.created") {
     // Handle user created event
-    const { id, first_name, last_name, username, email_addresses, image_url } = evt.data;
+    const { id, email_addresses, image_url } = evt.data;
     const userData = {
       clerkId: id,
-      name: `${first_name} ${last_name}`,
-      username: username,
       email: email_addresses[0].email_address,
       image_url: image_url,
     };
@@ -82,12 +80,9 @@ export async function POST(req: Request) {
 
   if (eventType === "user.updated") {
     // Handle user updated event
-    const { id, first_name, last_name, username, email_addresses, image_url } = evt.data;
+    const { id, image_url } = evt.data;
     const updatedUserData = {
-      name: `${first_name} ${last_name}`,
-      username: username,
-      email: email_addresses[0].email_address,
-      image_url: image_url,
+     image_url: image_url,
     };
     const updatedUser = await updateUser(id, updatedUserData);
     return NextResponse.json({ message: "User updated", user: updatedUser });
