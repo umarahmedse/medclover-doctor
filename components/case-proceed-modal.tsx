@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation"
 import { Toast, ToastAction, ToastProvider } from "@/components/ui/toast"
 import { useToast } from "@/hooks/use-toast"
 import { Spinner } from "./ui/spinner"
+import CircularSpinner from "./ui/CircularSpinner"
 
 interface CheckboxItem {
   id: string
@@ -171,7 +172,7 @@ export function CaseProceedModal({ isOpen, onClose, caseData }: CaseProceedModal
 
             {error && <div className="text-red-600">{error}</div>}
             <Button type="submit" disabled={loading}>
-              {loading ? <Spinner size={"medium"} show={true}/> : "Submit and Close Case"}
+              {loading ? <CircularSpinner/> : "Submit and Close Case"}
             </Button>
           </form>
         </div>

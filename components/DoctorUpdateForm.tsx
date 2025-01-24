@@ -16,6 +16,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select"; // Import Shadcn Select components
+import CircularSpinner from "./ui/CircularSpinner";
 
 const DoctorProfileUpdateForm = () => {
   const { session } = useSession();
@@ -202,11 +203,11 @@ const DoctorProfileUpdateForm = () => {
         <Button
           type="submit"
           disabled={loading}
-          className="md:w-[200px] w-full"
+          className="md:w-[200px] w-full flex items-center justify-center"
         >
           {loading ? (
             <>
-              <Spinner size={"medium"} show={true} className="mr-2" /> Updating...
+             <CircularSpinner/>
             </>
           ) : (
             "Update Profile"

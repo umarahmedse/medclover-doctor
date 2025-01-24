@@ -11,6 +11,7 @@ import { MedicalCaseStatus } from "@/components/medical-case-status"
 import { Spinner } from "@/components/ui/spinner"
 import { Button } from "@/components/ui/button"
 import { CaseProceedModal } from "@/components/case-proceed-modal"
+import CircularSpinner from "@/components/ui/CircularSpinner"
 
 export default function CaseView() {
   const { id } = useParams() // Get case ID from URL
@@ -43,7 +44,7 @@ export default function CaseView() {
   if (loading)
     return (
       <div className="flex items-center justify-center w-full h-full">
-        <Spinner size={"medium"} show={true} />
+        <CircularSpinner />
       </div>
     )
 
@@ -97,6 +98,24 @@ export default function CaseView() {
                 readOnly
               ></textarea>
             </div>
+            {caseData.doctorRemarks && (
+              <div>
+                <Label>Doctor's Remarks</Label>
+                <p className="border p-2 rounded-md hover:cursor-not-allowed">{caseData.doctorRemarks}</p>
+              </div>
+            )}
+            {caseData.diagnosis && (
+              <div>
+                <Label>Diagnosis</Label>
+                <p className="border p-2 rounded-md hover:cursor-not-allowed">{caseData.diagnosis}</p>
+              </div>
+            )}
+            {caseData.perscription && (
+              <div>
+                <Label>Prescription</Label>
+                <p className="border p-2 rounded-md hover:cursor-not-allowed">{caseData.perscription}</p>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -104,4 +123,3 @@ export default function CaseView() {
     </div>
   )
 }
-

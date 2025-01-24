@@ -37,8 +37,19 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
       return NextResponse.json({ message: "Case not found" }, { status: 404 });
     }
 
-    // Ensure caseData is not an array, and handle the case if it's null
-    const { _id, patientName, patientAge, assignedDoctor, organAffected, patientDescription,enhancedDescription ,isClosed} = caseData as any;
+    const {
+      _id,
+      patientName,
+      patientAge,
+      assignedDoctor,
+      organAffected,
+      patientDescription,
+      enhancedDescription,
+      isClosed,
+      doctorRemarks,
+      diagnosis,
+      perscription,
+    } = caseData as any;
 
     return NextResponse.json({
       _id: _id.toString(),
@@ -48,13 +59,17 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
       organAffected,
       patientDescription,
       enhancedDescription,
-      isClosed
+      isClosed,
+      doctorRemarks: doctorRemarks || "",
+      diagnosis: diagnosis || "",
+      perscription: perscription || "",
     });
   } catch (error) {
     console.error("Error fetching case:", error);
     return NextResponse.json({ message: "Failed to fetch case" }, { status: 500 });
   }
 }
+
 
 
 // Define the interface for Case
